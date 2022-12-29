@@ -8,7 +8,7 @@ export async function getStaticProps() { // lado servidor
             produtos
         }
     }
-} // com esse método (retorna as propriedades do componente) significa que estaremos trabalhando com componente estático, gerado uma única vez (produção)
+}
 
 export default function Estatico4(props) {
     console.log('[Cliente] renderizando o componente...')

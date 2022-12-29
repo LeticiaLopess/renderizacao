@@ -5,7 +5,7 @@ export function getStaticProps() {
             numero: Math.random()
         }
     }
-} // com esse método (retorna as propriedades do componente) significa que estaremos trabalhando com componente estático, gerado uma única vez (produção)
+}
 
 export default function Estatico3(props) {
     return (
