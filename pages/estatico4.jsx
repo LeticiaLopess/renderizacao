@@ -1,4 +1,5 @@
-export async function getStaticProps() {
+export async function getStaticProps() { // lado servidor
+    console.log('[Server] gerando props para o componente...')
     const resp = await fetch('http://localhost:3000/api/produtos')
     const produtos = await resp.json()
 
@@ -10,6 +11,8 @@ export async function getStaticProps() {
 } // com esse método (retorna as propriedades do componente) significa que estaremos trabalhando com componente estático, gerado uma única vez (produção)
 
 export default function Estatico4(props) {
+    console.log('[Cliente] renderizando o componente...')
+
     function renderizarProdutos() {
         return props.produtos.map(
             produto => {
