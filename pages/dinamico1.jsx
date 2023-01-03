@@ -1,4 +1,4 @@
-export function gerServerSideProps() {
+export function getServerSideProps() {
     console.log('[Server] gerando props para o componente...')
     return {
         props: {
