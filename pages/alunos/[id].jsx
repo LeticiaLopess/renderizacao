@@ -1,24 +1,41 @@
-export function getStaticPaths() {
+export async function getStaticPaths() {
+    const resp = await fetch('http://localhost:3000/api/alunos/tutores')
+    const ids = await resp.json()
+
+    const paths = ids.map(id => {
+        return { params: { id: `${id}` }}
+    })
+
     return {
-        fallback: false, // significa que se eu passar um id diferente para os parâmetros, ele vai gerar como resultado um erro 404
-        paths: [
-            { params: { id: '107'} }, // a partir desse componente, gero 3 páginas estáticas
-            { params: { id: '203'} },
-            { params: { id: '1345'} },
-        ]
-    } // qualquer valor diferente de um desses 3 id's, retornará um erro 404
+        fallback: true, // => 404 (false)
+        paths  
+    } 
 }
 
-export function getStaticProps() {
+export async function getStaticProps({ params }) {
+    const resp = await fetch (`http://localhost:3000/api/alunos/${params.id}`)
+    const aluno = await resp.json()
+
     return {
-        props: {}
+        props: {
+            aluno
+        }
     }
 }
 
-export default function AlunoPorId() {
+export default function AlunoPorId(props) {
+    const { aluno } = props // recebe aluno através de props
     return (
         <div>
             <h1>Detalhes do Aluno</h1>
+            {aluno ?
+                <ul>
+                    <li>{aluno.id}</li>
+                    <li>{aluno.nome}</li>
+                    <li>{aluno.email}</li>
+                </ul>
+                : false 
+            }  
         </div>
     )
 }
